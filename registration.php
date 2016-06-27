@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     die("Error! Cannot connect to the database");
   }
 
-   if(!preg_match("/^[a-zA-Z\_ ]*$/",$_POST["username"])) {
+   if(!preg_match("/^[a-zA-Z0-9\_ ]*$/",$_POST["username"])) {
       $nameErr = "*userame can have only alphanumerals and underscore";
       $flag=0;
    }
@@ -39,6 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
      $conf_password = $_POST['conf_password'];
    }
    else{
+     $flag = 0;
      $conf_passwordErr = 'These passwords do not match. Please try again.';
    }
 
@@ -77,24 +78,61 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		<head>
 			<link type="text/css" rel="stylesheet" href="studentdatabase.css"/>
       <style>
-        body{
-          text-align: left;
-        }
+      body{
+        font-weight: 900;
+        background-image: url("registrationbackground.jpg");
+        no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cove1
+        text-align: center;
+        display:inline-block;
+        transform: translate(35vw);
+      }
+      #submit{
+        font-size: 4vh;
+        font-weight: 900;
+        width: 21.5vw;
+        height: 7vh;
+        padding-top: 10px;
+        padding-bottom:25px;
+        color: #fff;
+        background-color: #337ab7;
+        border-color: #2e6da4;
+      }
+      h1{
+        /*transform: translate(38vw);verdana,geneva,*/
+        text-align: center;
+      }
+      #transparent{
+        background-color:grey;
+        padding-left: 5vw;
+        padding-right: 5vw;
+        border: 1px solid black;
+        opacity: 1;
+      }
+      input{
+        color: black;
+        font-weight: 900;
+        width: 21.5vw;
+        padding: 12px 0vh;
+        background: transparent;
+        border: 0;
+        border-bottom: 1px solid #435160;
+        outline: none;
 
-        h1{
-          /*transform: translate(38vw);*/
-          text-align: center;
-        }
-
+        font-size: 16px;
+      }
       </style>
       <title>
-        User registration page
+        Signup
       </title>
 		</head>
 
 		<body >
-        <h1 >Student Registration Form</h1>
-
+        <h1 >Signup</h1>
+        <div id = "transparent">
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" name="studentregistration">
           <h3>Username</h3>
           <input type="text" name="username"  placeholder="Type your user name" size="33.8"
@@ -119,7 +157,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <input type="password" name="conf_password" placeholder="Type your password" required size="33.8"><br/><br/>
           <span class="error"> <?php echo $conf_passwordErr;?></span><br/><br/>
 
-          <input type="submit" name="submit" value="Submit">
+          <input type="submit" name="submit" value="Submit" id="submit">
           <br/><br/>
 
           <span>
@@ -134,6 +172,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          </span>
 
         </form>
-
+      </div>
 		</body>
 	</html>

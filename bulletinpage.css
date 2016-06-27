@@ -1,0 +1,59 @@
+body {
+  text-align: center;
+  font-family: calibri,sans-serif;
+  color: darkslategray;
+  background-image: url("loginbackground.jpg");
+  no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cove;
+}
+input{
+  size:35;
+}
+#deleteimg:hover{
+
+}
+.button {
+    background-color: #337ab7;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+#admin_panel{
+  float: left;
+  }
+#logout{
+  float: right;
+  }
+th {
+  background-color: #58FAF4;
+  color:black;
+  font-weight: 200;
+}
+th,td {
+  text-align: left;
+  font-family: calibri,sans-serif;
+  padding-top: 0px;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-bottom: 7px;
+  /*border-bottom: 1px solid darkgray;*/
+}
+tr {
+  border-radius: 15px 50px:
+  border-collapse: separate;
+  border-spacing: 5em;
+  font-weight: 500;
+  opacity: 0.6;
+  font-size: 20px;
+  background: lightgray;
+  color : black;
+}

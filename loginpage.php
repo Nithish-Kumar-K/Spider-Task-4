@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    else {
      $name=htmlspecialchars($_POST["username"]);
    }
-	 $_SESSION['name'] = $name;
+	 //$_SESSION['name'] = $name;
    $password = htmlspecialchars($_POST["password"]);
    //if roll no is valid
    if($flag){
@@ -54,17 +54,51 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 <html>
   <head>
-    <link type="text/css" rel="stylesheet" href="studentdatabase.css"/>
     <style>
       body{
         text-align: center;
-      }
+        background-image: url("beforeloginbackground.jpg");
+        no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cove1
+        display:inline-block;
 
-      h1{
-        /*transform: translate(38vw);*/
-        text-align: center;
       }
+      .button {
+          background-color: #337ab7;
+          border: none;
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin: 4px 2px;
+          cursor: pointer;
+      }
+      #login{
+        font-size: 4vh;
+        font-family: "Oxygen","Oxygen";
+      }
+      #link{
+        float: right;
+        font-size: 4vh;
+        font-family: "Oxygen","Oxygen";
+        }
+      input{
+        color: black;
+        font-weight: 900;
+        width: 21.5vw;
+        padding: 12px 0vh;
+        background: transparent;
+        border: 0;
+        border-bottom: 1px solid #435160;
+        outline: none;
 
+        font-size: 16px;
+      }
     </style>
     <title>
       Login
@@ -72,8 +106,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </head>
 
   <body >
-      <h1 >Login to continue to NITT bulletin board</h1>
-
+    <a href ="registration.php" id="link" class="button">Signup?</a>
+    <br/><br/><br/>
+      <h1>TESV: SKYRIM</h1><h1> BULLETIN BOARD<h1>
+      <h1>Log In</h1>
       <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" name="studentlogin">
         <input type="text" name="username"  placeholder="Enter your username" size="33.8"
         value="<?php echo $name;?>" required ><br/>
@@ -81,8 +117,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <span class="error"> <?php echo $nameErr;?></span><br/><br/>
         <input type="password" name="password" placeholder="Type your password" required size="33.8"><br/><br/>
         <span class="error"> <?php echo $passwordErr;?></span><br/>
-        <input type="submit" name="submit" value="Login"><br/><br/>
+        <input type="submit" class="button" name="submit" value="Login" id="login"><br/><br/>
       </form>
-      <a href ="registration.php">New registration</a>
+
+
   </body>
 </html>

@@ -1,5 +1,7 @@
 <?php
 session_start();
+$name=$_SESSION['name'];
+
 if(!$_SESSION['login']){
   header("location:loginpage.php");
   die;
@@ -10,7 +12,7 @@ if(!$conn){
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $bullet = htmlspecialchars($_POST['add_post']);
+  $bullet = $name." says, <br>".htmlspecialchars($_POST['add_post']);
 
   $sqlins=$conn->prepare("INSERT INTO board (BULLETIN) VALUES(?)");
   //this will prevent sql injection
@@ -24,17 +26,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
  if(!($regis)) {
    die("Error preparing statements");
  }
+   header("location:bulletinpage.php");
 }
 ?>
 <html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="addbulletin.css"/>
+    <title>
+      Add Post
+    </title>
+  </head>
   <body >
       <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" name="bulletin_view">
       <br/><br/>
-      <h3>Add a new post</h3>
-      <textarea name="add_post" cols="80" rows="10" placeholder="Tell us something about yourself"><?php echo $abtme;?> </textarea>
+      <h1>Add a new post</h1>
+      <textarea name="add_post" cols="60" rows="20" placeholder="Enter your post here"><?php echo $abtme;?> </textarea>
       <br/><br/>
-      <input type="submit" name="submit" value="Add new post"><br/><br/>
-      <button type="button" id="bulletinpage" onclick="location.href='bulletinpage.php'">Back to bulletin page</button>
+      <input type="submit" name="submit" value="Add new post" id="new_post" class="button"><br/><br/>
       </form>
 
   </body>

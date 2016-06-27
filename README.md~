@@ -1,0 +1,5 @@
+# Spider-Task-4
+This is the repo for the fourth spider task - Authentication and Authorization.
+
+INSERT INTO users (USERNAME,EMAIL,ABOUT_ME,PASSWORD,ACCESS) VALUES ('Nithish Kumar','knithish.kumar.42@gmail.com','nothing','passcode','admin');
+

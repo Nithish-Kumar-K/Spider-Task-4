@@ -1,11 +1,25 @@
 <!DOCTYPE html>
 <?php
 // define variables and set to empty values
-$nameErr = $emailErr = $passwordErr = $conf_passwordErr = "";
+$nameErr = $emailErr = $passwordErr = $captcha_error= $conf_passwordErr = "";
 $name = $email =$password = $conf_password =$abtme= "";
 $flag=1;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $url ='https://www.google.com/recaptcha/api/siteverify';
+  $privatekey = "6Le8uSMTAAAAAK8V10SxtuBMh8ghLkWvej5CSu3d";
+  $response = file_get_contents($url."?secret=".$privatekey."&response=".
+  $_POST['g-recaptcha-response']."&remoteip=".$_SERVER['REMOTE_ADDR']);
+  $data = json_decode($response);
+
+  if(isset($data->success) AND $data->success==true){
+    $flag=1;
+  }
+  else{
+    $flag=0;
+    $captcha_error = 'You have not given the captcha properly';
+  }
+
   $conn = mysqli_connect("localhost", "Nithish", "Hohaahoh","bulletin_board");
   if(!$conn){
     die("Error! Cannot connect to the database");
@@ -18,7 +32,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    //use of htmlspecialchars is to prevent hacking
    else{
       $name=htmlspecialchars($_POST["username"]);
-    //  $abtme=htmlspecialchars($_POST["name"]);
     }
    if(!filter_var($_POST["email"],FILTER_VALIDATE_EMAIL)) {
      $emailErr = "*Email format Invalid";
@@ -60,13 +73,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
      }
     $regis = $sqlins->execute();
     if(!($regis)) {
-      //echo "Error Type : ",mysqli_error($conn),"<br>";
       die("Username already exists! Give new username");
     }
-     //if($regis)
-    //  echo "sdf";
-     //$sqlins->close();
-     //close connection to improve efficiency*/
+
    }
    $conn->close();
 }
@@ -128,6 +137,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <title>
         Signup
       </title>
+      <script src='https://www.google.com/recaptcha/api.js'></script>
 		</head>
 
 		<body >
@@ -157,6 +167,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <input type="password" name="conf_password" placeholder="Type your password" required size="33.8"><br/><br/>
           <span class="error"> <?php echo $conf_passwordErr;?></span><br/><br/>
 
+          <div class="g-recaptcha" data-sitekey="6Le8uSMTAAAAAPBtPryj7IZdGC7SC27uYWfIqUJ_"></div><br><br>
+          <span class="error"> <?php echo $captcha_error;?></span><br/><br/>
+
           <input type="submit" name="submit" value="Submit" id="submit">
           <br/><br/>
 
@@ -165,9 +178,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               if($regis) {
                 echo '<script type="text/javascript">alert
                 ("You have registered successfully");</script>';
-                header('Location: loginpage.php');
-                //echo "You have registered successfully. <br>";
-              }
+                //header('Location: loginpage.php');
+                }
               ?>
          </span>
 

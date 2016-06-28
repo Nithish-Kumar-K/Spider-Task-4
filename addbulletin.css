@@ -7,13 +7,10 @@ body {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cove;
+  background-size: cover;
 }
 input{
   size:35;
-}
-#deleteimg:hover{
-
 }
 .button {
     background-color: #337ab7;
